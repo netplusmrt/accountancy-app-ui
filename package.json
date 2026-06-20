@@ -1,0 +1,33 @@
+{
+  "name": "accountancy-app-ui",
+  "version": "1.0.0",
+  "description": "accountancy-app-ui",
+  "homepage": "https://github.com/netplusmrt/accountancy-app-ui#readme",
+  "bugs": {
+    "url": "https://github.com/netplusmrt/accountancy-app-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netplusmrt/accountancy-app-ui.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "clean:accountancy-app": "if exist accountancy-app rmdir /s /q accountancy-app && mkdir accountancy-app",
+    "copy:angular-build": "npx copyfiles -u 4 ../accountancy-app-ng16/dist/accountancy-app/**/* accountancy-app",
+    "fix-base": "node scripts/fix-base.js",
+    "zip:ui": "node scripts/create-ui-zip.js",
+    "github:publish": "node scripts/github-release.js",
+    "publish": "npm run clean:accountancy-app && npm run copy:angular-build && npm run fix-base && npm run zip:ui && npm run github:publish"
+  },
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
+  "author": "AccountancyApp",
+  "license": "ISC",
+  "devDependencies": {
+    "archiver": "^8.0.0"
+  }
+}
